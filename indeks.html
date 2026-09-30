@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aku Peduli, Aku Berbagi - IPAS Kelas 3 SD</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Fredoka & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#FF6B8B',
+                            yellow: '#FFD166',
+                            green: '#06D6A0',
+                            blue: '#118AB2',
+                            purple: '#8338EC',
+                            dark: '#073B4C'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F9FF;
+            color: #2D3748;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .bounce-gentle {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .card-hover {
+            transition: all 0.25s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        /* Touch friendly active states */
+        .btn-touch:active {
+            transform: scale(0.96);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-yellow">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white sticky top-0 z-40 border-b-4 border-brand-yellow shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-10 h-10 rounded-full bg-brand-pink flex items-center justify-center text-white text-xl font-bold shadow">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg md:text-xl font-bold text-brand-dark leading-none">AKU PEDULI, AKU BERBAGI</h1>
+                    <p class="text-xs text-gray-500 font-semibold">IPAS Kelas 3 SD</p>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <nav class="hidden md:flex space-x-2 text-sm font-semibold">
+                <button onclick="navigateTo('home')" class="nav-link px-3 py-1.5 rounded-xl hover:bg-gray-100"><i class="fa-solid fa-house mr-1"></i>Beranda</button>
+                <button onclick="navigateTo('materi')" class="nav-link px-3 py-1.5 rounded-xl hover:bg-gray-100"><i class="fa-solid fa-book-open mr-1"></i>Materi</button>
+                <button onclick="navigateTo('tugas')" class="nav-link px-3 py-1.5 rounded-xl hover:bg-gray-100"><i class="fa-solid fa-gamepad mr-1"></i>Tugas</button>
+                <button onclick="navigateTo('refleksi')" class="nav-link px-3 py-1.5 rounded-xl hover:bg-gray-100"><i class="fa-solid fa-pen-to-square mr-1"></i>Refleksi</button>
+                <button onclick="navigateTo('hasil')" class="nav-link px-3 py-1.5 rounded-xl hover:bg-gray-100"><i class="fa-solid fa-trophy mr-1"></i>Hasil</button>
+            </nav>
+
+            <button onclick="openTeacherModal()" class="bg-gray-100 hover:bg-gray-200 text-brand-dark font-semibold text-xs px-3 py-2 rounded-xl transition border border-gray-300">
+                <i class="fa-solid fa-user-tie mr-1 text-brand-blue"></i> Guru
+            </button>
+        </div>
+
+        <!-- Progress Bar Indicator -->
+        <div id="progressContainer" class="w-full bg-gray-200 h-2 hidden">
+            <div id="progressBar" class="bg-brand-green h-2 transition-all duration-500" style="width: 0%"></div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 md:p-6">
+
+        <!-- ================= PAGE 1: PESONA & IDENTITAS ================= -->
+        <section id="pageHome" class="space-y-6">
+            <div class="bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 text-white rounded-3xl p-6 md:p-10 shadow-xl relative overflow-hidden text-center">
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-yellow-300/20 rounded-full blur-xl"></div>
+
+                <div class="inline-block bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold mb-3">
+                    ✨ Modul Pembelajaran Interaktif
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold font-heading mb-2 leading-tight">AKU PEDULI, AKU BERBAGI</h2>
+                <p class="text-yellow-200 text-base md:text-xl font-medium mb-6">Belajar menjadi makhluk sosial yang peduli dan suka berbagi terhadap sesama</p>
+
+                <!-- Illustration Badges -->
+                <div class="flex justify-center gap-4 text-3xl md:text-4xl mb-6">
+                    <span class="p-3 bg-white/10 rounded-2xl bounce-gentle" style="animation-delay: 0s;">🤝</span>
+                    <span class="p-3 bg-white/10 rounded-2xl bounce-gentle" style="animation-delay: 0.2s;">🎁</span>
+                    <span class="p-3 bg-white/10 rounded-2xl bounce-gentle" style="animation-delay: 0.4s;">❤️</span>
+                    <span class="p-3 bg-white/10 rounded-2xl bounce-gentle" style="animation-delay: 0.6s;">🌟</span>
+                </div>
+
+                <div class="bg-white text-gray-800 rounded-2xl p-5 md:p-6 shadow-lg max-w-md mx-auto text-left">
+                    <h3 class="text-lg font-bold text-brand-dark mb-1 flex items-center">
+                        <i class="fa-solid fa-smile-beam text-brand-pink text-xl mr-2"></i> Selamat Datang, Sahabat IPAS!
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-4">Hari ini kita akan belajar bagaimana menunjukkan kepedulian dan kebaikan kepada orang-orang di sekitar kita.</p>
+
+                    <!-- Student Identity Form -->
+                    <form id="identityForm" onsubmit="handleStartLearning(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Nama Lengkap Siswa</label>
+                            <input type="text" id="studentName" required placeholder="Tulis namamu di sini..." 
+                                class="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 focus:border-brand-blue focus:outline-none text-sm font-semibold">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 uppercase mb-1">Kelas</label>
+                                <select id="studentClass" class="w-full px-3 py-2.5 rounded-xl border-2 border-gray-200 focus:border-brand-blue focus:outline-none text-sm font-semibold bg-white">
+                                    <option value="3 A">Kelas 3 A</option>
+                                    <option value="3 B">Kelas 3 B</option>
+                                    <option value="3 C">Kelas 3 C</option>
+                                    <option value="3 D">Kelas 3 D</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 uppercase mb-1">No. Absen</label>
+                                <input type="number" id="studentAbsen" required min="1" max="50" placeholder="1-50"
+                                    class="w-full px-3 py-2.5 rounded-xl border-2 border-gray-200 focus:border-brand-blue focus:outline-none text-sm font-semibold">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-green hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg border-b-4 border-emerald-700 btn-touch transition text-base flex items-center justify-center space-x-2 mt-4">
+                            <span>MULAI BELAJAR</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tujuan Pembelajaran -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <h3 class="text-lg font-bold text-brand-dark mb-3 flex items-center">
+                    <i class="fa-solid fa-bullseye text-brand-purple mr-2"></i> Tujuan Pembelajaran Kita
+                </h3>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-green mr-2 mt-0.5"></i> Menjelaskan arti peduli &amp; berbagi dengan bahasa sederhana.</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-green mr-2 mt-0.5"></i> Mengidentifikasi contoh kepedulian di sekolah &amp; rumah.</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-green mr-2 mt-0.5"></i> Menentukan perilaku positif dalam bermasyarakat.</li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-brand-green mr-2 mt-0.5"></i> Mempraktikkan sikap tolong-menolong dalam kehidupan.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2: MATERI PEMBELAJARAN ================= -->
+        <section id="pageMateri" class="hidden space-y-6">
+            <div class="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                <div>
+                    <h2 class="text-xl font-bold text-brand-dark font-heading">📖 Card Materi Interaktif</h2>
+                    <p class="text-xs text-gray-500">Geser atau tekan tombol untuk membaca slide materi</p>
+                </div>
+                <button onclick="openGoogleDocs()" class="bg-blue-50 text-brand-blue hover:bg-blue-100 font-semibold text-xs px-3 py-2 rounded-xl border border-blue-200 flex items-center space-x-1">
+                    <i class="fa-solid fa-file-word"></i>
+                    <span>Materi Lengkap (Docs)</span>
+                </button>
+            </div>
+
+            <!-- Material Slide Card Deck -->
+            <div id="materiDeck" class="bg-white rounded-3xl p-6 md:p-8 shadow-md border-2 border-gray-100 min-h-[360px] flex flex-col justify-between">
+                <div id="materiContent" class="space-y-4">
+                    <!-- Dynamic material content loaded via JS -->
+                </div>
+
+                <!-- Navigation Controls -->
+                <div class="flex items-center justify-between pt-6 border-t border-gray-100 mt-6">
+                    <button id="btnPrevMateri" onclick="changeMateri(-1)" class="px-4 py-2 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 text-sm">
+                        <i class="fa-solid fa-arrow-left mr-1"></i> Sebelum
+                    </button>
+                    <span id="materiIndicator" class="text-xs font-bold text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Slide 1 / 4</span>
+                    <button id="btnNextMateri" onclick="changeMateri(1)" class="px-4 py-2 bg-brand-blue text-white font-bold rounded-xl hover:bg-blue-600 text-sm shadow">
+                        Lanjut <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3: TUGAS INTERAKTIF ================= -->
+        <section id="pageTugas" class="hidden space-y-6">
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-bold text-brand-dark font-heading">🎮 Misi &amp; Tugas Interaktif</h2>
+                    <p class="text-xs text-gray-500">Selesaikan seluruh tantangan untuk mendapatkan Lencana!</p>
+                </div>
+                <div class="bg-yellow-100 text-yellow-800 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center">
+                    <i class="fa-solid fa-star text-yellow-500 mr-1 text-sm"></i>
+                    <span id="liveScoreBadge">Skor: 0</span>
+                </div>
+            </div>
+
+            <!-- Activity Tabs -->
+            <div class="flex space-x-2 overflow-x-auto pb-2 scrollbar-none">
+                <button onclick="switchTaskTab('A')" id="tabA" class="task-tab px-4 py-2 rounded-xl text-xs font-bold bg-brand-blue text-white whitespace-nowrap">A. Perilaku Peduli</button>
+                <button onclick="switchTaskTab('B')" id="tabB" class="task-tab px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 text-gray-700 whitespace-nowrap">B. Klasifikasi Card</button>
+                <button onclick="switchTaskTab('C')" id="tabC" class="task-tab px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 text-gray-700 whitespace-nowrap">C. Ayo Berbagi</button>
+                <button onclick="switchTaskTab('D')" id="tabD" class="task-tab px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 text-gray-700 whitespace-nowrap">D. Pasangkan Perilaku</button>
+                <button onclick="switchTaskTab('E')" id="tabE" class="task-tab px-4 py-2 rounded-xl text-xs font-bold bg-gray-200 text-gray-700 whitespace-nowrap">E. Tantangan Kasus</button>
+            </div>
+
+            <!-- Task Container Area -->
+            <div id="taskContentArea" class="bg-white rounded-3xl p-6 shadow-md border-2 border-gray-100">
+                <!-- Dynamic task content rendered via JS -->
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4: REFLEKSI SISWA ================= -->
+        <section id="pageRefleksi" class="hidden space-y-6">
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6 rounded-3xl shadow-md">
+                <h2 class="text-2xl font-bold font-heading mb-1">💭 Ayo Refleksi Diri</h2>
+                <p class="text-purple-100 text-xs md:text-sm">Tuliskan pemikiran dan pengalaman kebaikan yang pernah kamu lakukan!</p>
+            </div>
+
+            <form id="reflectionForm" onsubmit="handleSaveReflection(event)" class="space-y-4 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">1. Menurut pendapatmu sendiri, apa arti dari "Peduli"?</label>
+                    <textarea id="ref1" required rows="2" placeholder="Contoh: Peduli adalah membantu teman yang kesulitan..." class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-brand-purple focus:outline-none text-sm"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">2. Ceritakan satu contoh sikap berbagi yang pernah kamu lakukan!</label>
+                    <textarea id="ref2" required rows="2" placeholder="Contoh: Saya meminjamkan pensil kepada teman..." class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-brand-purple focus:outline-none text-sm"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">3. Siapa saja orang yang pernah membantumu di sekolah atau rumah?</label>
+                    <textarea id="ref3" required rows="2" placeholder="Contoh: Ibu, Ayah, Ibu Guru, dan Sahabat saya Budi..." class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-brand-purple focus:outline-none text-sm"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">4. Bagaimana perasaanmu ketika bisa membantu orang lain?</label>
+                    <textarea id="ref4" required rows="2" placeholder="Contoh: Saya merasa senang dan gembira sekali..." class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-brand-purple focus:outline-none text-sm"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">5. Apa SATU kebaikan yang ingin kamu lakukan hari ini?</label>
+                    <textarea id="ref5" required rows="2" placeholder="Contoh: Merapikan tempat tidur dan berbagi bekal..." class="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-brand-purple focus:outline-none text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-purple hover:bg-purple-700 text-white font-bold py-3 rounded-xl shadow-lg btn-touch transition text-sm flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>SIMPAN JAWABAN REFLEKSI</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- ================= PAGE 5: HASIL & LENCANA ================= -->
+        <section id="pageHasil" class="hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border-2 border-gray-100 text-center space-y-6">
+                <div class="inline-block p-4 bg-yellow-100 rounded-full text-yellow-600 text-4xl mb-2 bounce-gentle">
+                    🏆
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold font-heading text-brand-dark">PEMBELAJARAN SELESAI!</h2>
+                <p id="resultStudentTag" class="text-sm font-semibold text-gray-500">Nama Siswa - Kelas - No Absen</p>
+
+                <!-- Score Card Display -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-lg mx-auto">
+                    <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                        <span class="block text-xs font-bold text-blue-600 uppercase">Skor Akhir</span>
+                        <span id="resTotalScore" class="text-3xl font-bold text-brand-blue">0</span>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-2xl border border-green-100">
+                        <span class="block text-xs font-bold text-green-600 uppercase">Persentase</span>
+                        <span id="resPercentage" class="text-3xl font-bold text-brand-green">0%</span>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100">
+                        <span class="block text-xs font-bold text-emerald-600 uppercase">Benar</span>
+                        <span id="resCorrectCount" class="text-3xl font-bold text-emerald-600">0</span>
+                    </div>
+                    <div class="bg-rose-50 p-4 rounded-2xl border border-rose-100">
+                        <span class="block text-xs font-bold text-rose-600 uppercase">Salah</span>
+                        <span id="resWrongCount" class="text-3xl font-bold text-rose-500">0</span>
+                    </div>
+                </div>
+
+                <!-- Category & Positive Feedback Message -->
+                <div class="bg-gradient-to-r from-yellow-50 to-amber-50 p-4 rounded-2xl border border-yellow-200 max-w-lg mx-auto">
+                    <h4 id="resCategoryTitle" class="font-bold text-amber-800 text-base mb-1">Kategori: Sangat Baik ⭐⭐⭐</h4>
+                    <p id="resFeedbackMsg" class="text-xs md:text-sm text-amber-900">Hebat sekali! Kamu sudah memahami banyak contoh perilaku peduli dan berbagi dalam kehidupan sehari-hari.</p>
+                </div>
+
+                <!-- Earned Badges -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold uppercase text-gray-400 tracking-wider">Lencana Yang Diperoleh</h4>
+                    <div id="badgeContainer" class="flex flex-wrap justify-center gap-2">
+                        <!-- Badges rendered dynamically -->
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="pt-4 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-md mx-auto">
+                    <button onclick="sendDataToSheets()" id="btnSendSheets" class="bg-brand-green hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow btn-touch transition text-sm flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>KIRIM KE GOOGLE SHEETS</span>
+                    </button>
+                    <button onclick="resetAllQuiz()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-xl btn-touch transition text-sm flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>COBA LAGI</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <div class="md:hidden sticky bottom-0 z-30 bg-white border-t border-gray-200 py-2 px-4 flex justify-around text-center text-xs font-bold text-gray-600">
+        <button onclick="navigateTo('home')" class="p-1 hover:text-brand-blue flex flex-col items-center">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span>Beranda</span>
+        </button>
+        <button onclick="navigateTo('materi')" class="p-1 hover:text-brand-blue flex flex-col items-center">
+            <i class="fa-solid fa-book-open text-lg"></i>
+            <span>Materi</span>
+        </button>
+        <button onclick="navigateTo('tugas')" class="p-1 hover:text-brand-blue flex flex-col items-center">
+            <i class="fa-solid fa-gamepad text-lg"></i>
+            <span>Tugas</span>
+        </button>
+        <button onclick="navigateTo('refleksi')" class="p-1 hover:text-brand-blue flex flex-col items-center">
+            <i class="fa-solid fa-pen-to-square text-lg"></i>
+            <span>Refleksi</span>
+        </button>
+        <button onclick="navigateTo('hasil')" class="p-1 hover:text-brand-blue flex flex-col items-center">
+            <i class="fa-solid fa-trophy text-lg"></i>
+            <span>Hasil</span>
+        </button>
+    </div>
+
+    <!-- Teacher Dashboard & Settings Modal -->
+    <div id="teacherModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 space-y-6 shadow-2xl">
+            <div class="flex items-center justify-between border-b pb-3">
+                <h3 class="text-xl font-bold font-heading text-brand-dark flex items-center">
+                    <i class="fa-solid fa-user-tie text-brand-blue mr-2"></i> Dashboard &amp; Pengaturan Guru
+                </h3>
+                <button onclick="closeTeacherModal()" class="text-gray-400 hover:text-gray-600 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- PIN Auth Section -->
+            <div id="teacherAuthSection" class="space-y-4">
+                <p class="text-sm text-gray-600">Masukkan PIN Guru untuk mengakses data rekapitulasi pembelajaran (PIN Default: <code class="bg-gray-100 px-2 py-1 rounded font-bold text-brand-purple">1234</code>):</p>
+                <div class="flex space-x-2">
+                    <input type="password" id="teacherPin" placeholder="Masukkan PIN 1234" class="px-4 py-2 border-2 border-gray-200 rounded-xl text-sm font-semibold flex-grow focus:outline-none focus:border-brand-blue">
+                    <button onclick="verifyTeacherPin()" class="bg-brand-blue text-white px-5 py-2 rounded-xl text-sm font-bold">Masuk</button>
+                </div>
+            </div>
+
+            <!-- Teacher Content Section (Hidden by default) -->
+            <div id="teacherContentSection" class="hidden space-y-6">
+                <!-- Google Sheets API URL Config -->
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200 space-y-2">
+                    <label class="block text-xs font-bold text-blue-900 uppercase">Konfigurasi Google Apps Script Web App URL:</label>
+                    <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/AKfycb.../exec" class="w-full p-2.5 bg-white border border-blue-300 rounded-xl text-xs font-mono">
+                    <button onclick="saveScriptUrl()" class="bg-brand-blue text-white text-xs font-bold px-3 py-1.5 rounded-lg">Simpan URL Backend</button>
+                </div>
+
+                <!-- Google Docs URL Config -->
+                <div class="bg-purple-50 p-4 rounded-2xl border border-purple-200 space-y-2">
+                    <label class="block text-xs font-bold text-purple-900 uppercase">Konfigurasi Google Docs URL (Materi Lengkap):</label>
+                    <input type="text" id="docsUrlInput" placeholder="https://docs.google.com/document/d/..." class="w-full p-2.5 bg-white border border-purple-300 rounded-xl text-xs font-mono">
+                    <button onclick="saveDocsUrl()" class="bg-brand-purple text-white text-xs font-bold px-3 py-1.5 rounded-lg">Simpan URL Google Docs</button>
+                </div>
+
+                <!-- Summary Stats -->
+                <div class="grid grid-cols-3 gap-3 text-center">
+                    <div class="bg-gray-50 p-3 rounded-xl border">
+                        <span class="block text-xs text-gray-500 font-bold">Siswa Mengerjakan</span>
+                        <span id="teacherTotalStudents" class="text-xl font-bold text-brand-dark">0</span>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-xl border">
+                        <span class="block text-xs text-gray-500 font-bold">Rata-Rata Skor</span>
+                        <span id="teacherAvgScore" class="text-xl font-bold text-brand-green">0</span>
+                    </div>
+                    <div class="bg-gray-50 p-3 rounded-xl border">
+                        <span class="block text-xs text-gray-500 font-bold">Nilai Tertinggi</span>
+                        <span id="teacherMaxScore" class="text-xl font-bold text-brand-purple">0</span>
+                    </div>
+                </div>
+
+                <!-- Local Submissions Table -->
+                <div>
+                    <h4 class="text-sm font-bold text-gray-700 mb-2">Rekapitulasi Siswa Terimpan Lokal:</h4>
+                    <div class="overflow-x-auto border rounded-xl">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-gray-100 font-bold text-gray-600">
+                                <tr>
+                                    <th class="p-2">Nama</th>
+                                    <th class="p-2">Kelas</th>
+                                    <th class="p-2">Skor</th>
+                                    <th class="p-2">Persentase</th>
+                                    <th class="p-2">Refleksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teacherTableBody" class="divide-y text-gray-700">
+                                <tr><td colspan="5" class="p-3 text-center text-gray-400">Belum ada data pengerjaan.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Code.gs Script Viewer -->
+                <div class="space-y-2">
+                    <h4 class="text-xs font-bold uppercase text-gray-600">📜 Kode Google Apps Script (Code.gs):</h4>
+                    <pre class="bg-gray-900 text-green-400 p-3 rounded-xl text-xs overflow-x-auto font-mono">
+function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var data = JSON.parse(e.postData.contents);
+    sheet.appendRow([
+      new Date(),
+      data.nama,
+      data.kelas,
+      data.absen,
+      data.skor,
+      data.persentase + "%",
+      data.jawabanBenar,
+      data.jawabanSalah,
+      data.badge,
+      JSON.stringify(data.refleksi)
+    ]);
+    return ContentService.createTextOutput(JSON.stringify({"status":"success"}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({"status":"error", "message": error.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Logic & Data Scripts -->
+    <script>
+        // Configuration Default URLs
+        let GOOGLE_DOCS_URL = localStorage.getItem('IPAS_DOCS_URL') || "https://docs.google.com/document/d/1_EXMPLE_LINK_HERE";
+        let GOOGLE_SHEETS_SCRIPT_URL = localStorage.getItem('IPAS_SCRIPT_URL') || "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+        // Global State Variables
+        let studentData = {
+            nama: '',
+            kelas: '3 A',
+            absen: '',
+            refleksi: {}
+        };
+
+        let currentMateriIndex = 0;
+        let currentTaskTab = 'A';
+        let studentScore = 0;
+        let correctCount = 0;
+        let wrongCount = 0;
+
+        // Interactive Tasks Answer Log & Lock
+        let answeredTasks = {
+            taskA: false,
+            taskB: [false, false, false, false, false, false, false, false],
+            taskC: false,
+            taskD: false,
+            taskE: [false, false, false, false, false]
+        };
+
+        const materiList = [
+            {
+                title: "Materi 1 — Aku Makhluk Sosial",
+                icon: "fa-users",
+                color: "text-brand-blue",
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm text-gray-700 leading-relaxed font-medium">
+                            <span class="font-bold text-brand-blue">Manusia adalah makhluk sosial.</span> Artinya, kita tidak dapat hidup sendiri. Kita hidup bersama orang lain dan saling membutuhkan satu sama lain.
+                        </p>
+                        <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
+                            <h4 class="font-bold text-xs uppercase text-brand-blue mb-2">Contoh Kegiatan Makhluk Sosial:</h4>
+                            <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs font-semibold text-gray-700">
+                                <li class="bg-white p-2 rounded-xl shadow-sm">🤝 Belajar bersama teman</li>
+                                <li class="bg-white p-2 rounded-xl shadow-sm">🏡 Membantu orang tua di rumah</li>
+                                <li class="bg-white p-2 rounded-xl shadow-sm">⚽ Bermain bersama di lapangan</li>
+                                <li class="bg-white p-2 rounded-xl shadow-sm">🧹 Kerja bakti membersihkan kelas</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Materi 2 — Apa Itu Peduli?",
+                icon: "fa-heart",
+                color: "text-brand-pink",
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm text-gray-700 leading-relaxed font-medium">
+                            <span class="font-bold text-brand-pink">Peduli</span> adalah sikap memperhatikan keadaan orang lain dan mau membantu saat mereka membutuhkan pertolongan.
+                        </p>
+                        <div class="bg-pink-50 p-4 rounded-2xl border border-pink-100">
+                            <h4 class="font-bold text-xs uppercase text-brand-pink mb-2">Contoh Perilaku Peduli:</h4>
+                            <ul class="space-y-1.5 text-xs font-semibold text-gray-700">
+                                <li class="flex items-center"><i class="fa-solid fa-heart text-brand-pink mr-2"></i> Menolong teman yang jatuh di halaman sekolah.</li>
+                                <li class="flex items-center"><i class="fa-solid fa-heart text-brand-pink mr-2"></i> Menghibur teman yang sedang merasa sedih.</li>
+                                <li class="flex items-center"><i class="fa-solid fa-heart text-brand-pink mr-2"></i> Membantu teman yang kesulitan memahami pelajaran.</li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Materi 3 — Apa Itu Berbagi?",
+                icon: "fa-gift",
+                color: "text-brand-purple",
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm text-gray-700 leading-relaxed font-medium">
+                            <span class="font-bold text-brand-purple">Berbagi</span> adalah memberikan sebagian dari apa yang kita miliki kepada orang lain secara ikhlas tanpa mengharapkan balasan.
+                        </p>
+                        <div class="bg-purple-50 p-4 rounded-2xl border border-purple-100">
+                            <h4 class="font-bold text-xs uppercase text-brand-purple mb-2">Berbagi Tidak Selalu Berupa Barang!</h4>
+                            <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-gray-700">
+                                <div class="bg-white p-2 rounded-xl">🍎 Berbagi makanan</div>
+                                <div class="bg-white p-2 rounded-xl">✏️ Meminjamkan pensil</div>
+                                <div class="bg-white p-2 rounded-xl">⏱️️ Berbagi waktu</div>
+                                <div class="bg-white p-2 rounded-xl">💡 Berbagi pengetahuan</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "Materi 4 — Situasi Sehari-hari",
+                icon: "fa-street-view",
+                color: "text-brand-green",
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm text-gray-700 leading-relaxed font-medium">
+                            Mari kita uji kepedulianmu! Klik pilihan tindakan yang paling tepat untuk situasi di bawah ini:
+                        </p>
+                        <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100 space-y-3">
+                            <p class="text-xs font-bold text-emerald-900">Situasi: Teman sekelasmu lupa membawa pensil saat jam menggambar.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                                <button onclick="checkMateriMiniQuiz(this, true)" class="p-2.5 bg-white rounded-xl font-bold border border-gray-200 hover:bg-emerald-100 text-left">
+                                    A. Meminjamkan pensil cadanganmu
+                                </button>
+                                <button onclick="checkMateriMiniQuiz(this, false)" class="p-2.5 bg-white rounded-xl font-bold border border-gray-200 hover:bg-rose-100 text-left">
+                                    B. Acuh dan menyembunyikan pensil
+                                </button>
+                            </div>
+                            <div id="materiQuizFeedback" class="hidden text-xs font-bold p-2 rounded-xl"></div>
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        function navigateTo(pageId) {
+            const pages = ['pageHome', 'pageMateri', 'pageTugas', 'pageRefleksi', 'pageHasil'];
+            pages.forEach(p => {
+                document.getElementById(p).classList.add('hidden');
+            });
+
+            const pageMap = {
+                'home': 'pageHome',
+                'materi': 'pageMateri',
+                'tugas': 'pageTugas',
+                'refleksi': 'pageRefleksi',
+                'hasil': 'pageHasil'
+            };
+
+            const targetPage = pageMap[pageId] || 'pageHome';
+            document.getElementById(targetPage).classList.remove('hidden');
+
+            // Update Progress Bar
+            const progressMap = { 'home': 0, 'materi': 25, 'tugas': 50, 'refleksi': 75, 'hasil': 100 };
+            document.getElementById('progressContainer').classList.remove('hidden');
+            document.getElementById('progressBar').style.width = (progressMap[pageId] || 0) + '%';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleStartLearning(e) {
+            e.preventDefault();
+            studentData.nama = document.getElementById('studentName').value.trim();
+            studentData.kelas = document.getElementById('studentClass').value;
+            studentData.absen = document.getElementById('studentAbsen').value;
+
+            renderMateriSlide();
+            renderTaskArea();
+            navigateTo('materi');
+        }
+
+        function renderMateriSlide() {
+            const slide = materiList[currentMateriIndex];
+            document.getElementById('materiContent').innerHTML = `
+                <div class="flex items-center space-x-3 mb-2">
+                    <i class="fa-solid ${slide.icon} text-2xl ${slide.color}"></i>
+                    <h3 class="text-xl font-bold font-heading text-brand-dark">${slide.title}</h3>
+                </div>
+                ${slide.content}
+            `;
+
+            document.getElementById('materiIndicator').innerText = `Slide ${currentMateriIndex + 1} / ${materiList.length}`;
+            document.getElementById('btnPrevMateri').disabled = currentMateriIndex === 0;
+            document.getElementById('btnPrevMateri').classList.toggle('opacity-50', currentMateriIndex === 0);
+        }
+
+        function changeMateri(delta) {
+            currentMateriIndex += delta;
+            if (currentMateriIndex < 0) currentMateriIndex = 0;
+            if (currentMateriIndex >= materiList.length) {
+                currentMateriIndex = materiList.length - 1;
+                navigateTo('tugas');
+                return;
+            }
+            renderMateriSlide();
+        }
+
+        function checkMateriMiniQuiz(btn, isCorrect) {
+            const fb = document.getElementById('materiQuizFeedback');
+            fb.classList.remove('hidden', 'bg-emerald-200', 'bg-rose-200', 'text-emerald-900', 'text-rose-900');
+            if (isCorrect) {
+                fb.classList.add('bg-emerald-200', 'text-emerald-900');
+                fb.innerText = "✨ Tepat sekali! Meminjamkan pensil adalah contoh perilaku peduli dan berbagi.";
+            } else {
+                fb.classList.add('bg-rose-200', 'text-rose-900');
+                fb.innerText = "❌ Coba pikirkan kembali, peduli artinya mau membantu orang lain.";
+            }
+        }
+
+        function switchTaskTab(tab) {
+            currentTaskTab = tab;
+            document.querySelectorAll('.task-tab').forEach(b => {
+                b.classList.remove('bg-brand-blue', 'text-white');
+                b.classList.add('bg-gray-200', 'text-gray-700');
+            });
+
+            document.getElementById(`tab${tab}`).classList.remove('bg-gray-200', 'text-gray-700');
+            document.getElementById(`tab${tab}`).classList.add('bg-brand-blue', 'text-white');
+
+            renderTaskArea();
+        }
+
+        function renderTaskArea() {
+            const container = document.getElementById('taskContentArea');
+
+            if (currentTaskTab === 'A') {
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-brand-dark font-heading">Aktivitas A — Pilih Perilaku Peduli</h3>
+                        <p class="text-xs text-gray-600">Situasi: Temanmu terjatuh saat berlari di halaman sekolah. Apa tindakan peduli yang harus dilakukan?</p>
+                        
+                        <div class="space-y-2">
+                            <button onclick="answerTaskA(false)" class="w-full text-left p-3 rounded-2xl border-2 border-gray-200 font-bold text-xs hover:border-brand-pink transition">
+                                A. Membiarkan teman yang jatuh dan tetap bermain.
+                            </button>
+                            <button onclick="answerTaskA(true)" class="w-full text-left p-3 rounded-2xl border-2 border-gray-200 font-bold text-xs hover:border-brand-green transition">
+                                B. Segera menghampiri dan menolong teman yang jatuh.
+                            </button>
+                            <button onclick="answerTaskA(false)" class="w-full text-left p-3 rounded-2xl border-2 border-gray-200 font-bold text-xs hover:border-brand-pink transition">
+                                C. Menertawakan teman yang jatuh.
+                            </button>
+                        </div>
+                        <div id="fbTaskA" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+                    </div>
+                `;
+            } else if (currentTaskTab === 'B') {
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-brand-dark font-heading">Aktivitas B — Peduli atau Tidak Peduli?</h3>
+                        <p class="text-xs text-gray-600">Tentukan apakah tindakan pada kartu berikut menunjukkan sikap Peduli atau Tidak Peduli:</p>
+                        <div id="gridTaskB" class="grid grid-cols-1 sm:grid-cols-2 gap-3"></div>
+                    </div>
+                `;
+                renderTaskBGrid();
+            } else if (currentTaskTab === 'C') {
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-brand-dark font-heading">Aktivitas C — Ayo Berbagi</h3>
+                        <p class="text-xs text-gray-600">Kamu membawa dua pensil. Teman sebangku lupa membawa pensil. Apa yang sebaiknya dilakukan?</p>
+                        <div class="space-y-2">
+                            <button onclick="answerTaskC(false)" class="w-full text-left p-3 rounded-2xl border-2 border-gray-200 font-bold text-xs hover:border-rose-300">A. Menyembunyikan pensil cadangan.</button>
+                            <button onclick="answerTaskC(true)" class="w-full text-left p-3 rounded-2xl border-2 border-gray-200 font-bold text-xs hover:border-emerald-300">B. Meminjamkan satu pensil dengan senyuman ikhlas.</button>
+                            <button onclick="answerTaskC(false)" class="w-full text-left p-3 rounded-2xl border-2 border-gray-200 font-bold text-xs hover:border-rose-300">C. Mengejek teman yang lupa.</button>
+                        </div>
+                        <div id="fbTaskC" class="hidden p-3 rounded-xl text-xs font-bold"></div>
+                    </div>
+                `;
+            } else if (currentTaskTab === 'D') {
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-brand-dark font-heading">Aktivitas D — Pasangkan Perilaku</h3>
+                        <p class="text-xs text-gray-600">Klik tombol kategori yang tepat untuk setiap perilaku di bawah ini:</p>
+                        <div id="listTaskD" class="space-y-3"></div>
+                    </div>
+                `;
+                renderTaskDList();
+            } else if (currentTaskTab === 'E') {
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-bold text-brand-dark font-heading">Aktivitas E — Tantangan Kasus Sehari-hari</h3>
+                        <p class="text-xs text-gray-600">Selesaikan 5 tantangan studi kasus di bawah ini:</p>
+                        <div id="listTaskE" class="space-y-4"></div>
+                    </div>
+                `;
+                renderTaskEList();
+            }
+        }
+
+        function updateScore(points, isCorrect) {
+            if (isCorrect) {
+                studentScore += points;
+                correctCount++;
+            } else {
+                wrongCount++;
+            }
+            document.getElementById('liveScoreBadge').innerText = `Skor: ${studentScore}`;
+        }
+
+        function answerTaskA(isCorrect) {
+            if (answeredTasks.taskA) return;
+            answeredTasks.taskA = true;
+            const fb = document.getElementById('fbTaskA');
+            fb.classList.remove('hidden');
+
+            if (isCorrect) {
+                fb.className = "p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-900";
+                fb.innerText = "Tepat sekali! Menolong teman yang jatuh adalah contoh perilaku peduli.";
+                updateScore(20, true);
+            } else {
+                fb.className = "p-3 rounded-xl text-xs font-bold bg-rose-100 text-rose-900";
+                fb.innerText = "Coba lagi nanti. Perhatikan tindakan yang menunjukkan bantuan kepada orang lain.";
+                updateScore(0, false);
+            }
+        }
+
+        const taskBItems = [
+            { text: "Membantu Ibu mencuci piring", correct: "PEDULI" },
+            { text: "Mengejek teman yang kalah main", correct: "TIDAK PEDULI" },
+            { text: "Membuang sampah pada tempatnya", correct: "PEDULI" },
+            { text: "Membagikan roti bekal kepada teman", correct: "PEDULI" },
+            { text: "Pura-pura tidak tahu teman minta tolong", correct: "TIDAK PEDULI" },
+            { text: "Mendoakan teman yang sedang sakit", correct: "PEDULI" },
+            { text: "Merebut mainan adik", correct: "TIDAK PEDULI" },
+            { text: "Meminjamkan buku catatan kelas", correct: "PEDULI" }
+        ];
+
+        function renderTaskBGrid() {
+            const grid = document.getElementById('gridTaskB');
+            grid.innerHTML = taskBItems.map((item, idx) => `
+                <div class="bg-gray-50 p-3 rounded-2xl border border-gray-200 flex flex-col justify-between space-y-2">
+                    <p class="text-xs font-bold text-gray-700">${idx+1}. ${item.text}</p>
+                    <div class="flex space-x-2">
+                        <button onclick="checkTaskB(${idx}, 'PEDULI', this)" class="flex-1 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow btn-touch">PEDULI</button>
+                        <button onclick="checkTaskB(${idx}, 'TIDAK PEDULI', this)" class="flex-1 py-1.5 bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold rounded-xl shadow btn-touch">TIDAK PEDULI</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkTaskB(idx, choice, btn) {
+            if (answeredTasks.taskB[idx]) return;
+            answeredTasks.taskB[idx] = true;
+
+            const isCorrect = choice === taskBItems[idx].correct;
+            const parent = btn.parentElement;
+            parent.innerHTML = `
+                <span class="text-xs font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">
+                    ${isCorrect ? '✓ Benar' : '✗ Salah'} (${taskBItems[idx].correct})
+                </span>
+            `;
+            updateScore(10, isCorrect);
+        }
+
+        function answerTaskC(isCorrect) {
+            if (answeredTasks.taskC) return;
+            answeredTasks.taskC = true;
+            const fb = document.getElementById('fbTaskC');
+            fb.classList.remove('hidden');
+
+            if (isCorrect) {
+                fb.className = "p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-900";
+                fb.innerText = "Hebat! Berbagi barang milik kita membuat teman senang dan bahagia.";
+                updateScore(20, true);
+            } else {
+                fb.className = "p-3 rounded-xl text-xs font-bold bg-rose-100 text-rose-900";
+                fb.innerText = "Kurang tepat. Berbagi adalah tindakan terpuji.";
+                updateScore(0, false);
+            }
+        }
+
+        const taskDItems = [
+            { text: "Menolong teman jatuh", ans: "Peduli" },
+            { text: "Berbagi kue serabi", ans: "Berbagi" },
+            { text: "Mengejek baju teman", ans: "Tidak Peduli" },
+            { text: "Membantu orang tua", ans: "Peduli" }
+        ];
+
+        function renderTaskDList() {
+            const list = document.getElementById('listTaskD');
+            list.innerHTML = taskDItems.map((item, idx) => `
+                <div class="bg-gray-50 p-3 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-2">
+                    <span class="text-xs font-bold text-gray-700">${item.text}</span>
+                    <div id="taskDChoice_${idx}" class="flex space-x-1">
+                        <button onclick="checkTaskD(${idx}, 'Peduli')" class="px-3 py-1 bg-blue-500 text-white rounded-lg text-xs font-bold">Peduli</button>
+                        <button onclick="checkTaskD(${idx}, 'Berbagi')" class="px-3 py-1 bg-purple-500 text-white rounded-lg text-xs font-bold">Berbagi</button>
+                        <button onclick="checkTaskD(${idx}, 'Tidak Peduli')" class="px-3 py-1 bg-gray-500 text-white rounded-lg text-xs font-bold">Tidak Peduli</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkTaskD(idx, choice) {
+            const isCorrect = choice === taskDItems[idx].ans;
+            document.getElementById(`taskDChoice_${idx}`).innerHTML = `
+                <span class="text-xs font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">
+                    ${isCorrect ? '✓ Tepat' : '✗ Jawaban: ' + taskDItems[idx].ans}
+                </span>
+            `;
+            updateScore(10, isCorrect);
+        }
+
+        const taskECases = [
+            { q: "Rani melihat temannya duduk sendirian dan menangis. Apa yang dilakukan Rani?", options: ["Pura-pura tidak melihat", "Menghampiri dan menghibur teman", "Meninggalkan lokasi"], ans: 1 },
+            { q: "Pak Guru membawa tumpukan buku berat. Apa yang sebaiknya kamu lakukan?", options: ["Bantu membawakan buku", "Tertawa saja", "Langsung lari pulang"], ans: 0 },
+            { q: "Doni membawa dua buah apel segar. Budi tidak membawa bekal. Doni sebaiknya...", options: ["Memakan keduanya sendirian", "Membagi satu apel untuk Budi", "Sembunyi di toilet"], ans: 1 },
+            { q: "Kelas 3 kotor setelah jam seni mewarnai. Semua siswa sebaiknya...", options: ["Kerja sama membersihkan kelas", "Menyalahkan guru", "Saling lempar sampah"], ans: 0 },
+            { q: "Siti kesulitan mengerjakan soal IPAS. Sebagai kawan yang baik, kita...", options: ["Menjelaskan dengan sabar", "Mengejek Siti bodoh", "Menyuruh Siti menyerah"], ans: 0 }
+        ];
+
+        function renderTaskEList() {
+            const list = document.getElementById('listTaskE');
+            list.innerHTML = taskECases.map((c, idx) => `
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-2">
+                    <p class="text-xs font-bold text-gray-800">${idx+1}. ${c.q}</p>
+                    <div id="caseOpt_${idx}" class="space-y-1">
+                        ${c.options.map((opt, oIdx) => `
+                            <button onclick="checkTaskE(${idx}, ${oIdx})" class="w-full text-left p-2 rounded-xl bg-white border border-gray-200 text-xs font-semibold hover:bg-gray-100">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkTaskE(cIdx, oIdx) {
+            if (answeredTasks.taskE[cIdx]) return;
+            answeredTasks.taskE[cIdx] = true;
+
+            const isCorrect = oIdx === taskECases[cIdx].ans;
+            const box = document.getElementById(`caseOpt_${cIdx}`);
+            box.innerHTML = `
+                <span class="text-xs font-bold ${isCorrect ? 'text-emerald-600' : 'text-rose-600'}">
+                    ${isCorrect ? '✓ Jawaban Sangat Tepat!' : '✗ Jawaban Tepat: ' + taskECases[cIdx].options[taskECases[cIdx].ans]}
+                </span>
+            `;
+            updateScore(15, isCorrect);
+        }
+
+        function handleSaveReflection(e) {
+            e.preventDefault();
+            studentData.refleksi = {
+                q1: document.getElementById('ref1').value,
+                q2: document.getElementById('ref2').value,
+                q3: document.getElementById('ref3').value,
+                q4: document.getElementById('ref4').value,
+                q5: document.getElementById('ref5').value
+            };
+
+            calculateFinalResults();
+            navigateTo('hasil');
+
+            // Trigger Confetti Celebration
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function calculateFinalResults() {
+            document.getElementById('resultStudentTag').innerText = `${studentData.nama || 'Siswa'} - ${studentData.kelas} (Absen ${studentData.absen || '-'})`;
+            
+            const maxPoints = 215; // Total possible max points across tasks
+            const percentage = Math.min(100, Math.round((studentScore / maxPoints) * 100));
+
+            document.getElementById('resTotalScore').innerText = studentScore;
+            document.getElementById('resPercentage').innerText = `${percentage}%`;
+            document.getElementById('resCorrectCount').innerText = correctCount;
+            document.getElementById('resWrongCount').innerText = wrongCount;
+
+            // Category & Messages
+            const catTitle = document.getElementById('resCategoryTitle');
+            const catMsg = document.getElementById('resFeedbackMsg');
+
+            if (percentage >= 90) {
+                catTitle.innerText = "Kategori: Sangat Baik ⭐⭐⭐⭐";
+                catMsg.innerText = "Hebat sekali! Kamu sudah memahami seluruh konsep kepedulian dan siap menjadi sahabat bagi semua teman.";
+            } else if (percentage >= 80) {
+                catTitle.innerText = "Kategori: Baik ⭐⭐⭐";
+                catMsg.innerText = "Bagus! Kamu memahami sebagian besar materi perilaku peduli dan berbagi.";
+            } else if (percentage >= 70) {
+                catTitle.innerText = "Kategori: Cukup ⭐⭐";
+                catMsg.innerText = "Cukup baik! Ayo tingkatkan kepedulianmu di kehidupan sehari-hari.";
+            } else {
+                catTitle.innerText = "Kategori: Perlu Bimbingan ⭐";
+                catMsg.innerText = "Terus semangat! Ayo pelajari kembali materi dan coba lagi dengan ceria.";
+            }
+
+            // Badges earned
+            const badgesContainer = document.getElementById('badgeContainer');
+            badgesContainer.innerHTML = `
+                <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-bold">⭐ Sahabat Peduli</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold">⭐ Suka Berbagi</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold">⭐ Teman Baik</span>
+            `;
+
+            // Save locally for teacher dashboard
+            saveToLocalStorage();
+        }
+
+        function saveToLocalStorage() {
+            const records = JSON.parse(localStorage.getItem('IPAS_RECORDS') || '[]');
+            records.push({
+                nama: studentData.nama,
+                kelas: studentData.kelas,
+                absen: studentData.absen,
+                skor: studentScore,
+                persentase: Math.min(100, Math.round((studentScore / 215) * 100)),
+                refleksi: studentData.refleksi,
+                timestamp: new Date().toLocaleString()
+            });
+            localStorage.setItem('IPAS_RECORDS', JSON.stringify(records));
+        }
+
+        async function sendDataToSheets() {
+            const btn = document.getElementById('btnSendSheets');
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Mengirim...</span>`;
+
+            const payload = {
+                nama: studentData.nama || "Anak Cerdas",
+                kelas: studentData.kelas,
+                absen: studentData.absen,
+                skor: studentScore,
+                persentase: Math.min(100, Math.round((studentScore / 215) * 100)),
+                jawabanBenar: correctCount,
+                jawabanSalah: wrongCount,
+                badge: "Sahabat Peduli, Suka Berbagi",
+                refleksi: studentData.refleksi
+            };
+
+            try {
+                await fetch(GOOGLE_SHEETS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                btn.className = "bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl text-sm flex items-center justify-center space-x-2";
+                btn.innerHTML = `<i class="fa-solid fa-circle-check"></i> <span>BERHASIL DIKIRIM!</span>`;
+            } catch (err) {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> <span>Gagal, Coba Lagi</span>`;
+            }
+        }
+
+        function resetAllQuiz() {
+            studentScore = 0;
+            correctCount = 0;
+            wrongCount = 0;
+            answeredTasks = {
+                taskA: false,
+                taskB: [false, false, false, false, false, false, false, false],
+                taskC: false,
+                taskD: false,
+                taskE: [false, false, false, false, false]
+            };
+            document.getElementById('liveScoreBadge').innerText = "Skor: 0";
+            navigateTo('home');
+        }
+
+        function openTeacherModal() {
+            document.getElementById('teacherModal').classList.remove('hidden');
+        }
+
+        function closeTeacherModal() {
+            document.getElementById('teacherModal').classList.add('hidden');
+        }
+
+        function verifyTeacherPin() {
+            const pin = document.getElementById('teacherPin').value;
+            if (pin === '1234') {
+                document.getElementById('teacherAuthSection').classList.add('hidden');
+                document.getElementById('teacherContentSection').classList.remove('hidden');
+
+                // Populate URLs
+                document.getElementById('scriptUrlInput').value = GOOGLE_SHEETS_SCRIPT_URL;
+                document.getElementById('docsUrlInput').value = GOOGLE_DOCS_URL;
+
+                loadTeacherTable();
+            } else {
+                alert("PIN Salah! Gunakan PIN default 1234");
+            }
+        }
+
+        function saveScriptUrl() {
+            const url = document.getElementById('scriptUrlInput').value.trim();
+            GOOGLE_SHEETS_SCRIPT_URL = url;
+            localStorage.setItem('IPAS_SCRIPT_URL', url);
+            alert("URL Google Apps Script berhasil disimpan!");
+        }
+
+        function saveDocsUrl() {
+            const url = document.getElementById('docsUrlInput').value.trim();
+            GOOGLE_DOCS_URL = url;
+            localStorage.setItem('IPAS_DOCS_URL', url);
+            alert("URL Google Docs berhasil disimpan!");
+        }
+
+        function openGoogleDocs() {
+            window.open(GOOGLE_DOCS_URL, '_blank');
+        }
+
+        function loadTeacherTable() {
+            const records = JSON.parse(localStorage.getItem('IPAS_RECORDS') || '[]');
+            document.getElementById('teacherTotalStudents').innerText = records.length;
+
+            if (records.length === 0) return;
+
+            const totalScores = records.reduce((acc, curr) => acc + curr.skor, 0);
+            const maxScore = Math.max(...records.map(r => r.skor));
+
+            document.getElementById('teacherAvgScore').innerText = Math.round(totalScores / records.length);
+            document.getElementById('teacherMaxScore').innerText = maxScore;
+
+            const tbody = document.getElementById('teacherTableBody');
+            tbody.innerHTML = records.map(r => `
+                <tr>
+                    <td class="p-2 font-bold">${r.nama}</td>
+                    <td class="p-2">${r.kelas} (${r.absen})</td>
+                    <td class="p-2 font-bold text-brand-blue">${r.skor}</td>
+                    <td class="p-2 text-brand-green font-bold">${r.persentase}%</td>
+                    <td class="p-2 text-xs truncate max-w-[120px]">${r.refleksi?.q1 || '-'}</td>
+                </tr>
+            `).join('');
+        }
+
+        // Initialize view on load
+        window.onload = function() {
+            renderMateriSlide();
+        };
+    </script>
+</body>
+</html>
